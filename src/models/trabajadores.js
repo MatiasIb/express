@@ -43,6 +43,14 @@ const usuarioSchema = mongoose.Schema({
     contactosEmergencia:{
         type: Array
     },
+    usuario:{
+        type:String,
+        required:true
+    },
+    clave:{
+        type:String,
+        required:true
+    }
 
     
 });
