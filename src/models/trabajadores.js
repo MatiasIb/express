@@ -34,7 +34,7 @@ const usuarioSchema = mongoose.Schema({
         required:true
     },
     fechaIngreso:{
-        type: Date,
+        type: String,
         required:true
     },
     cargasFamiliares:{
