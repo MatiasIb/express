@@ -14,8 +14,9 @@ function logger(req, res, next){
 app.use(express.json());
 app.use(morgan("dev"));
 app.use('/api', userRoutes)
-app.use((req, res) => {
+app.use((req, res, next) => {
   res.send('FUNCIONA')
+  next()
 })
 
 //rutas
