@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const userRoutes = require("./routes/usuarios")
+const areaRoutes = require("./routes/areaDepartamento")
+
 
 /* //middleware proteccion a rutas
 function logger(req, res, next){
@@ -14,6 +16,7 @@ function logger(req, res, next){
 app.use(express.json());
 app.use(morgan("dev"));
 app.use('/api', userRoutes)
+app.use('/api/estructura/', areaRoutes)
 app.use((req, res, next) => {
   res.send('FUNCIONA')
   next()
