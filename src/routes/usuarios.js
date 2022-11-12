@@ -37,13 +37,22 @@ router.delete('/usuarios/:rut' , (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 })
-
+//actualizarUsuario
 router.put('/usuarios/:rut', (req, res) => {
     console.log(req.body)
     usuarioSchema.updateOne({rut:req.params.rut}, {$set:{nombres:req.body.nombres, apellidos:req.body.apellidos, sexo:req.body.sexo, direccion:req.body.direccion, telefono:req.body.telefono, cargo:req.body.cargo, departamento:req.body.departamento, fechaIngreso:req.body.fechaIngreso, usuario:req.body.usuario, clave:req.body.clave}})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 } )
+
+//traerUsuarioPorRut
+router.get('/usuarios/:rut' , (req, res) => {
+    console.log(req.params.rut)
+    usuarioSchema
+    .findOne({rut:`${req.params.rut}`})
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
 
 
 
