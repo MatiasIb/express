@@ -12,6 +12,7 @@ router.post('/usuarios', (req, res) => {
     .catch((error) => res.json({ message:error }))
 } )
 
+//traerTodosLosUsuarios
 router.get('/usuarios', (req, res) => {
     usuarioSchema
     .find()
@@ -37,6 +38,7 @@ router.delete('/usuarios/:rut' , (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 })
+
 //actualizarUsuario
 router.put('/usuarios/:rut', (req, res) => {
     console.log(req.body)
@@ -53,6 +55,60 @@ router.get('/usuarios/:rut' , (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 })
+
+
+//agregarContactosEmergencia
+router.put('/usuarios/contactosEmergencia/:rut', (req, res) => {
+    usuarioSchema.updateOne({
+        rut:req.params.rut
+    }, {$push:{
+        contactosEmergencia:{
+                rut: req.body.rut,
+                nombre:req.body.nombre,
+                relacion:req.body.relacion,
+                telefono:req.body.telefono
+            }
+        }
+    })
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+//agregarCargasFamiliares
+router.put('/usuarios/cargasFamiliares/:rut', (req, res) => {
+    usuarioSchema.updateOne({
+        rut:req.params.rut
+    }, {$push:{
+        cargasFamiliares:{
+                rut:req.body.rut,
+                nombres:req.body.nombres,
+                parentezco:req.body.parentezco,
+                sexo:req.body.sexo
+            }
+        }
+    })
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+//eliminarContactosEmergencia
+//db.trabajadores.updateOne({rut:"asdsad"}, {"$pull":{cargasFamiliares:{rut:"xd"}}})
+
+router.put('/usuarios/contactosEmergencia/:rut/:rutFamiliar', (req, res) => {
+    usuarioSchema.updateOne({
+        rut:req.params.rut
+    },  {"$pull":{cargasFamiliares:{rut:req.params.rutFamiliar}}}
+    )
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+
+
+
+
+
+
 
 
 
