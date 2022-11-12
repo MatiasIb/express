@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { updateOne } = require('../models/trabajadores');
 const usuarioSchema = require("../models/trabajadores")
 
 const router = express.Router()
@@ -9,7 +10,6 @@ router.post('/usuarios', (req, res) => {
     user.save()
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
-    
 } )
 
 router.get('/usuarios', (req, res) => {
@@ -28,6 +28,23 @@ router.get('/usuarios/:usuario/:clave', (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 })
+
+//eliminarUsuario
+router.delete('/usuarios/:rut' , (req, res) => {
+    console.log(req.params.rut)
+    usuarioSchema
+    .deleteOne({rut:`${req.params.rut}`})
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+router.put('/usuarios/:rut', (req, res) => {
+    console.log(req.body)
+    usuarioSchema.updateOne({rut:req.params.rut}, {$set:{nombres:req.body.nombres, apellidos:req.body.apellidos, sexo:req.body.sexo, direccion:req.body.direccion, telefono:req.body.telefono, cargo:req.body.cargo, departamento:req.body.departamento, fechaIngreso:req.body.fechaIngreso, usuario:req.body.usuario, clave:req.body.clave}})
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+} )
+
 
 
 
