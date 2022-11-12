@@ -64,7 +64,7 @@ router.put('/usuarios/contactosEmergencia/:rut', (req, res) => {
     }, {$push:{
         contactosEmergencia:{
                 rut: req.body.rut,
-                nombre:req.body.nombre,
+                nombres:req.body.nombre,
                 relacion:req.body.relacion,
                 telefono:req.body.telefono
             }
