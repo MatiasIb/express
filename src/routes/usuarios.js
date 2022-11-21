@@ -91,10 +91,10 @@ router.put('/usuarios/cargasFamiliares/:rut', (req, res) => {
     .catch((error) => res.json({ message:error }))
 })
 
-//eliminarContactosEmergencia
+//eliminarcargasFamliares
 //db.trabajadores.updateOne({rut:"asdsad"}, {"$pull":{cargasFamiliares:{rut:"xd"}}})
 
-router.put('/usuarios/contactosEmergencia/:rut/:rutFamiliar', (req, res) => {
+router.put('/usuarios/cargasFamiliares/eliminar/:rut/:rutFamiliar', (req, res) => {
     usuarioSchema.updateOne({
         rut:req.params.rut
     },  {"$pull":{cargasFamiliares:{rut:req.params.rutFamiliar}}}
@@ -103,6 +103,58 @@ router.put('/usuarios/contactosEmergencia/:rut/:rutFamiliar', (req, res) => {
     .catch((error) => res.json({ message:error }))
 })
 
+//eliminarContactosEmergencia
+router.put('/usuarios/contactosEmergencia/eliminar/:rut/:rutContacto', (req, res) => {
+    usuarioSchema.updateOne({
+        rut:req.params.rut
+    },  {"$pull":{contactosEmergencia:{rut:req.params.rutContacto}}}
+    )
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+//actualizar contactos Emergencias
+router.put('/usuarios/contactosEmergencia/actualizar/:rut/:rutContacto/', (req, res) => {
+    usuarioSchema.updateOne(
+           {rut:req.params.rut, "contactosEmergencia.rut":req.params.rutContacto},{
+            $set: {
+                "contactosEmergencia.$":req.body
+            }
+           }
+    )
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+//actualizar cargasFamiliares
+
+router.put('/usuarios/cargasFamiliares/actualizar/:rut/:rutCarga/', (req, res) => {
+    usuarioSchema.updateOne(
+           {rut:req.params.rut, "cargasFamiliares.rut":req.params.rutContacto},{
+            $set: {
+                "cargasFamiliares.$":req.body
+            }
+           }
+    )
+    .then((data) => res.json(data))
+    .catch((error) => res.json({ message:error }))
+})
+
+
+
+
+
+
+
+
+
+
+/* 
+
+db.trabajadores.updateOne({rut:"asdsad"}, {$set:{"contactosEmergencia.0.rut":"19.395.509-6",
+                        "contactosEmergencia.0.nombres":"Kevin",
+                          "contactosEmergencia.0.relacion":"Padre",
+                        "contactosEmergencia.0.telefono":"983134912"}})
+ */
 
 
 
