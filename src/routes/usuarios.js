@@ -4,12 +4,6 @@ const usuarioSchema = require("../models/trabajadores")
 
 const router = express.Router()
 
-//loginFlutter nada que ver
-router.get('/loginFlutter', (req, res) =>{
-    res.json({usuario: "matias",
-    clave: "Mati12#"})
-})
-
 //createUser
 router.post('/usuarios', (req, res) => {
     const user = usuarioSchema(req.body);
