@@ -25,7 +25,7 @@ router.get('/usuarios', (req, res) => {
 router.get('/usuarios/:usuario/:clave', (req, res) => {
     console.log(req.params.usuario)
     usuarioSchema
-    .findOne({usuario:`${req.params.usuario}`, clave:`${req.params.clave}`}, {_id:0, usuario:1, clave:1, cargo:1, rut:1})
+    .findOne({usuario:`${req.params.usuario}`, clave:`${req.params.clave}`})
     .then((data) => res.json(data))
     .catch((error) => res.json({ message:error }))
 })
