@@ -21,6 +21,7 @@ router.get('/usuarios', (req, res) => {
     
 } )
 
+//listadoTrabajadores
 //validarUsuario
 router.get('/usuarios/:usuario/:clave', (req, res) => {
     console.log(req.params.usuario)
@@ -129,7 +130,7 @@ router.put('/usuarios/contactosEmergencia/actualizar/:rut/:rutContacto/', (req, 
 
 router.put('/usuarios/cargasFamiliares/actualizar/:rut/:rutCarga/', (req, res) => {
     usuarioSchema.updateOne(
-           {rut:req.params.rut, "cargasFamiliares.rut":req.params.rutContacto},{
+           {rut:req.params.rut, "cargasFamiliares.rut":req.params.rutCarga},{
             $set: {
                 "cargasFamiliares.$":req.body
             }
