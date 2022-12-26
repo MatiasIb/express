@@ -20,7 +20,7 @@ app.use(cors())
 app.use('/api', userRoutes)
 app.use('/api/estructura/', areaRoutes)
 app.use((req, res, next) => {
-  res.send('FUNCIONA')
+  res.send('no existe esa ruta')
   next()
 })
 
